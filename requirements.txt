@@ -1,5 +1,4 @@
 Flask
 Flask-RESTful
 SQLAlchemy
-gunicorn
-
+psycopg2
