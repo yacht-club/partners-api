@@ -24,6 +24,7 @@ class PartnerIndividual(Base):
     id = Column(Integer, PARTNER_INDIVIDUAL_ID, primary_key=True, autoincrement=True)
     name = Column(String, nullable=False)
     email = Column(String, nullable=False)
+    phone = Column(String)
     description = Column(String, nullable=True)
     tags = Column(ARRAY(String))
     ext_id = Column(String, nullable=False)
@@ -33,6 +34,7 @@ class PartnerIndividual(Base):
                 "email": self.email,
                 "description": self.description,
                 "tags": self.tags,
+                "phone": self.phone,
                 "ext_id": self.ext_id,
                 "partner_type": "INDIVIDUAL"}
 

@@ -57,8 +57,9 @@ class DBWrapper:
         description = data.get("description")
         tags = data.get("tags", [])
         email = data["email"]
+        phone = data.get("phone")
         ext_id = str(uuid4())
-        p = PartnerIndividual(name=name, email=email, description=description, tags=tags, ext_id=ext_id)
+        p = PartnerIndividual(name=name, email=email, description=description, tags=tags, phone=phone, ext_id=ext_id)
         rel_p = RelPartnerType(partner_ext_id=ext_id, partner_type="INDIVIDUAL")
 
         self.session.add(p)
