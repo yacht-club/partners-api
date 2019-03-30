@@ -6,6 +6,7 @@ Base = declarative_base()
 
 PARTNER_INDIVIDUAL_ID = Sequence('partners_individual_id_seq', start=1000)
 PARTNER_LEGAL_ID = Sequence('partners_legal_id_seq', start=1000)
+USER_ID = Sequence('users_id_seq')
 
 
 class PartnerType(Base):
@@ -59,11 +60,23 @@ class PartnerLegal(Base):
 
 
 class RelPartnerType(Base):
-    __tablename__ ="rel_partner_type"
+    __tablename__ = "rel_partner_type"
 
     partner_ext_id = Column(String, primary_key=True)
     partner_type = Column(String, ForeignKey("partner_type.name"), nullable=False)
 
 
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, USER_ID, primary_key=True, autoincrement=True)
+    username = Column(String, nullable=False)
+    user_ext_id = Column(String, nullable=False)
+    role = Column(String, nullable=False)
+
+    def to_json(self):
+        return {"username": self.username,
+                "role": self.role,
+                "user_ext_id": self.user_ext_id}
 
 

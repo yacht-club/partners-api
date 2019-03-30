@@ -81,3 +81,30 @@ class DBWrapper:
             partner = self.session.query(PartnerIndividual).filter(PartnerIndividual.ext_id == ext_id).first().to_json()
 
         return partner
+
+    def create_user(self, data):
+        username = data["username"]
+        role = data["role"]
+        user_ext_id = str(uuid4())
+        user = User(username=username, role=role, user_ext_id=user_ext_id)
+
+        self.session.add(user)
+        self.session.commit()
+
+        return user.to_json()
+
+    def get_users(self, username, role):
+        users = self.session.query(User)
+        if username:
+            users = users.filter(User.username.like("%{0}%".format(username)))
+        if role:
+            users = users.filter(User.role.like("%{0}%".format(role)))
+
+        return [user.to_json() for user in users.all()]
+
+    def get_user_by_id(self, user_ext_id):
+        user = self.session.query(User).filter(User.user_ext_id == user_ext_id).first()
+        if user is None:
+            return None
+
+        return user.to_json()

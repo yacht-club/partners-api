@@ -1,7 +1,7 @@
 from flask import Flask, current_app
 from flask_restful import Api
 
-from api.resources import Partner
+from api.resources import Partner, User
 from db_wrapper import DBWrapper
 
 from config import DATABASE, USER, PASSWORD, HOST, PORT, SCHEMA
@@ -16,5 +16,6 @@ def create_app():
 
     api = Api(app)
     api.add_resource(Partner, "/partners", "/partners/<string:partner_ext_id>")
+    api.add_resource(User, "/users", "/users/<string:user_ext_id>")
 
     return app
