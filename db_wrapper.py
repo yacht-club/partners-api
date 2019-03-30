@@ -71,12 +71,12 @@ class DBWrapper:
     def get_partner_by_id(self, ext_id):
         partner_type = self.session.query(RelPartnerType.partner_type).\
                        filter(RelPartnerType.partner_ext_id == ext_id).\
-                       first()[0]
+                       first()
 
         if partner_type is None:
             return None
 
-        if partner_type == "LEGAL":
+        if partner_type[0] == "LEGAL":
             partner = self.session.query(PartnerLegal).filter(PartnerLegal.ext_id == ext_id).first().to_json()
         else:
             partner = self.session.query(PartnerIndividual).filter(PartnerIndividual.ext_id == ext_id).first().to_json()
