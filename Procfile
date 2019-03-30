@@ -1,1 +1,1 @@
-web: gunicorn partners-api-app:run
+web: gunicorn app:partners-api
