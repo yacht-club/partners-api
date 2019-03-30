@@ -15,6 +15,6 @@ def create_app():
         current_app.db_wrapper = DBWrapper(DATABASE, USER, PASSWORD, HOST, PORT, SCHEMA)
 
     api = Api(app)
-    api.add_resource(Partner, "/partners")
+    api.add_resource(Partner, "/partners", "/partners/<string:partner_ext_id>")
 
     return app
