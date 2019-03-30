@@ -1,4 +1,7 @@
+import os
+
 from api import create_app
+
 
 from config import PORT
 
